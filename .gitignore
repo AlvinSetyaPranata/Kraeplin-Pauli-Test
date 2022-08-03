@@ -1,2 +1,4 @@
 __pycache__
 generator/__pycache__
+test.py
+*.xlsx

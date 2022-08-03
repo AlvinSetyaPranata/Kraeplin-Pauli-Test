@@ -1,38 +1,47 @@
-from writer import Writer
-from random import randint
-
-# Dev
-
-
-# Release
-
-
+from .writer import Writer
+from tkinter.ttk import Notebook
+import tkinter
 
 # --------- Program Starts ------------- #
 
 
 
-class Maker(Writer):
-    def __init__(self, x_size, y_size, fname="exam"):
-        self.x_size = x_size
-        self.y_size = y_size
-
-        self._current_row = 0
-        self._current_col = 65
-        self.fname = fname
-
-        super().__init__(fname)
+class App():
+    def __init__(self):
+        self._window = tkinter.Tk()
+        self._window.title("Kraeplin and Pauli Test")
+        self._window.geometry("500x500")
+        
+        self._main_frame = Notebook(self._window)
+        self._main_frame.pack(fill=tkinter.BOTH, expand=True)
 
 
-    def make(self):
-        data = []
-
-        for _ in range(self.x_size):
-            if self._current_row == self.y_size:
-                break
-
-            data.append([self._current_row, chr(self._current_col), randint(1, 9)])
+    def kraeplin(self):
+        self._k_frame = tkinter.Frame(self._main_frame)
+        self._k_frame.pack(fill=tkinter.BOTH, expand=True)
+        self._main_frame.add(self._k_frame, text="Kraeplin")
 
 
-        self.write(data)
+    def pauli(self):
+        self._p_frame = tkinter.Frame(self._main_frame)
+        self._p_frame.pack(fill=tkinter.BOTH, expand=True)
+        self._main_frame.add(self._p_frame, text="Pauli")
+
+    def configuration(self):
+        self._c_frame = tkinter.Frame(self._main_frame)
+        self._c_frame.pack(fill=tkinter.BOTH, expand=True)
+        self._main_frame.add(self._c_frame, text="Settings")
+
+
+    @property
+    def run(self):
+        self.kraeplin()
+        self.pauli()
+        self.configuration()
+
+        self._window.mainloop()
+
+
+
+
 
